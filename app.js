@@ -415,7 +415,8 @@ function handleApiAiResponse(sender, response) {
         }
     } else if (isDefined(responseText)) {
 
-        sendTextMessage(sender, responseText);
+        //sendTextMessage(sender, responseText);
+        handleApiAiAction(sender, action, responseText, contexts, parameters);
     }
     else
     {
