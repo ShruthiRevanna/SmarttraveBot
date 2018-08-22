@@ -364,6 +364,8 @@ function handleApiAiResponse(sender, response) {
     let parameters = response.result.parameters;
 
     console.log("Inside APIAI response");
+    console.log(action);
+
 
     sendTypingOff(sender);
 
@@ -396,6 +398,7 @@ function handleApiAiResponse(sender, response) {
             previousType = messages[i].type;
 
         }
+        console.log("API output in first if");
     } else if (responseText == '' && !isDefined(action)) {
         //api ai could not evaluate input.
         console.log('Unknown query' + response.result.resolvedQuery);
@@ -413,6 +416,10 @@ function handleApiAiResponse(sender, response) {
     } else if (isDefined(responseText)) {
 
         sendTextMessage(sender, responseText);
+    }
+    else
+    {
+        handleApiAiAction(sender, action, responseText, contexts, parameters);
     }
 }
 
