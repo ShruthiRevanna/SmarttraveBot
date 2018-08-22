@@ -227,14 +227,14 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                       qs  : {
                           appid: config.TFL_API_ID,
                           appkey: config.TFL_API_KEY,
-                          qstatus: parameters["underground_line"],
+                          //qstatus: parameters["underground_line"],
                          },
                       },function(error,response,body){
                       if(!error && response.statusCode == 200){
-                            let name = Bakerloo;
+                            //let name = Bakerloo;
                             let lineStatuses = JSON.parse(body);
                             if (lineStatuses.hasOwnProperty("lineStatuses")) {
-                                let reply = '${responseText} ${lineStatuses["lineStatuses"][0]["statusSeverityDescription"]}';
+                                let reply = '${responseText} ${[0]["lineStatuses"]["statusSeverityDescription"]}';
                                 sendTextMessage(sender, reply);
                             }
                                 else{
