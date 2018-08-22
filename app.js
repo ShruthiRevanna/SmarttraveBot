@@ -378,11 +378,8 @@ function handleApiAiResponse(sender, response) {
 
     sendTypingOff(sender);
 
-    if (isDefined(action)) {
-        console.log("Hi Shruthi")
-        handleApiAiAction(sender, action, responseText, contexts, parameters);
-    } else if (isDefined(messages) && (messages.length == 1 && messages[0].type != 0 || messages.length > 1)) {
-        let timeoutInterval = 1100;
+    if (isDefined(messages) && (messages.length == 1 && messages[0].type != 0 || messages.length > 1)) {
+        let timeoutInterval = 1500;
         let previousType ;
         let cardTypes = [];
         let timeout = 0;
@@ -411,15 +408,14 @@ function handleApiAiResponse(sender, response) {
 
         }
         console.log("API output in first if");
-    }
-    else if (responseText == '' && !isDefined(action)) {
+    } else if (responseText == '' && !isDefined(action)) {
         //api ai could not evaluate input.
         console.log('Unknown query' + response.result.resolvedQuery);
         sendTextMessage(sender, "I'm not sure what you want. Can you be more specific?");
-    } /*else if (isDefined(action)) {
+    } else if (isDefined(action)) {
         console.log("Hi Shruthi")
         handleApiAiAction(sender, action, responseText, contexts, parameters);
-    } */else if (isDefined(responseData) && isDefined(responseData.facebook)) {
+    } else if (isDefined(responseData) && isDefined(responseData.facebook)) {
         try {
             console.log('Response as formatted message' + responseData.facebook);
             sendTextMessage(sender, responseData.facebook);
