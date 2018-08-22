@@ -236,13 +236,14 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     if(!error && response.statusCode == 200){
                         let bus_id = parameters["bus"];
                         //let index =0;
+                        console.log("Status 200");
                         for(var bus_num=0; bus_num<30;bus_num++)
                         {
 
                             let bus = JSON.parse(body);
                             if (bus[bus_num]["id"] == bus_id){
                                 let status = bus[bus_num]["lineStatuses"][0]["statusSeverityDescription"];
-
+                                console.log(status);
                                 if (status == "Good service") {
                                     let reply = bus[bus_num]["lineStatuses"][0]["statusSeverityDescription"];
                                 } else if (status == "Special service"){
