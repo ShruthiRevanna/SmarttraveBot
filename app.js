@@ -224,6 +224,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             console.log("Inside line-status");
             if(parameters.hasOwnProperty("underground_line")&& parameters["underground_line"] != ''){
                   var request = require('request');
+                  console.log("Inside action if statement");
 
                   request({
                      url : 'https://api.tfl.gov.uk/line/mode/tube/status',
@@ -239,9 +240,12 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                             if (lineStatuses.hasOwnProperty("lineStatuses")) {
                                 let reply = '${[0]["lineStatuses"][0]["statusSeverityDescription"]}';
                                 sendTextMessage(sender, reply);
+                                console.log("Reply response");
+                                console.log(reply);
                             }
                                 else{
                                     sendTextMessage(sender,'No service available');
+                                    console.log("Something went wrong")
                                 }
                             }else{
                           console.error(response.error)
@@ -251,6 +255,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
     }
             else{
                 sendTextMessage(sender, responseText);
+                console.log("Something went wrong with if statement")
             }
 
             break;
@@ -415,13 +420,10 @@ function handleApiAiResponse(sender, response) {
         }
     } else if (isDefined(responseText)) {
 
-        //sendTextMessage(sender, responseText);
-        handleApiAiAction(sender, action, responseText, contexts, parameters);
+        sendTextMessage(sender, responseText);
+        //handleApiAiAction(sender, action, responseText, contexts, parameters);
     }
-    else
-    {
-        handleApiAiAction(sender, action, responseText, contexts, parameters);
-    }
+
 }
 
 function sendToApiAi(sender, text) {
