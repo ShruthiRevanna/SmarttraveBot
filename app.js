@@ -238,7 +238,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                             //let name = Bakerloo;
                             let lineStatuses = JSON.parse(body);
                             //if (lineStatuses.hasOwnProperty("lineStatuses")) {
-                                let reply = '${lineStatuses[0]["lineStatuses"][0]["statusSeverityDescription"]}';
+                                let reply = lineStatuses[0]["lineStatuses"][0]["statusSeverityDescription"];
                                 sendTextMessage(sender, reply);
                                 console.log("Reply response");
                                 console.log(reply);
