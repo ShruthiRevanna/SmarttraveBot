@@ -372,8 +372,9 @@ function handleApiAiResponse(sender, response) {
     let contexts = response.result.contexts;
     let parameters = response.result.parameters;
 
-    console.log("Inside APIAI response");
-    console.log(action);
+    console.log(messages);
+    console.log(messages.length);
+    console.log(messages[0].type);
 
 
     sendTypingOff(sender);
