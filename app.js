@@ -371,9 +371,13 @@ function handleApiAiResponse(sender, response) {
     let action = response.result.action;
     let contexts = response.result.contexts;
     let parameters = response.result.parameters;
-
+    console.log("messages");
     console.log(messages);
+
+    console.log("messages.length");
     console.log(messages.length);
+
+    console.log("messages[0].type");
     console.log(messages[0].type);
 
 
