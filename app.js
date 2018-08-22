@@ -415,11 +415,11 @@ function handleApiAiResponse(sender, response) {
         console.log("API output in first if");
     }
 
-    if (responseText == '' && !isDefined(action)) {
+    /*if (responseText == '' && !isDefined(action)) {
         //api ai could not evaluate input.
         console.log('Unknown query' + response.result.resolvedQuery);
         sendTextMessage(sender, "I'm not sure what you want. Can you be more specific?");
-    } else if (isDefined(action)) {
+    } else */if (isDefined(action)) {
         console.log("Hi Shruthi")
         handleApiAiAction(sender, action, responseText, contexts, parameters);
     } else if (isDefined(responseData) && isDefined(responseData.facebook)) {
