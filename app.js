@@ -226,13 +226,13 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                   var request = require('request');
                   console.log("Inside action if statement");
 
-                  request({
-                     url : 'https://api.tfl.gov.uk/line/mode/tube/status',
-                      qs  : {
+                  request.get({
+                     url : "https://api.tfl.gov.uk/line/mode/tube/status",
+                      /*qs  : {
                           appid: config.TFL_API_ID,
                           appkey: config.TFL_API_KEY,
                           //qstatus: parameters["underground_line"],
-                         },
+                         },*/
                       },function(error,response,body){
                       if(!error && response.statusCode == 200){
                             //let name = Bakerloo;
