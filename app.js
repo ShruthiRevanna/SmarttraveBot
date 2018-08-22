@@ -217,10 +217,11 @@ function handleEcho(messageId, appId, metadata) {
 }
 
 function handleApiAiAction(sender, action, responseText, contexts, parameters) {
+    console.log("Inside Handle Api Ai action");
 
     switch (action) {
         case "line-status":
-            console.log("Hi Revanna");
+            console.log("Inside line-status");
             if(parameters.hasOwnProperty("underground_line")&& parameters["underground_line"] != ''){
                   var request = require('request');
 
@@ -361,6 +362,8 @@ function handleApiAiResponse(sender, response) {
     let action = response.result.action;
     let contexts = response.result.contexts;
     let parameters = response.result.parameters;
+
+    console.log("Inside APIAI response");
 
     sendTypingOff(sender);
 
