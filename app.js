@@ -245,10 +245,10 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 console.log("Reply response");
                                 console.log(reply);
                                  }
-                                else{
+                                /*else{
                                     sendTextMessage(sender,'No service available');
                                     console.log("Something went wrong")
-                                }
+                                }*/
                             }
                       }else{
                           console.error(response.error)
