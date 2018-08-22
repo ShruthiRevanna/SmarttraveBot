@@ -223,8 +223,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
         case "bus-status":
             console.log("Inside bus-status");
             if(parameters.hasOwnProperty("bus")&& parameters["bus"] != ''){
+                console.log("Parameter received");
                 var request = require('request');
-
                 request.get({
                     url : "https://api.tfl.gov.uk/line/mode/bus/status/",
                     qs  : {
@@ -239,7 +239,6 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         console.log("Status 200");
                         for(var bus_num=0; bus_num<30;bus_num++)
                         {
-
                             let bus = JSON.parse(body);
                             if (bus[bus_num]["id"] == bus_id){
                                 let status = bus[bus_num]["lineStatuses"][0]["statusSeverityDescription"];
@@ -250,17 +249,13 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                     let reply = bus[bus_num]["lineStatuses"][0]["reason"];
                                 }
                                 sendTextMessage(sender, reply);
-
                                 console.log("Reply response");
                                 console.log(reply);
                             }
-                           // index++;
                         }
                     }else{
                         console.error(response.error)
-
                     }
-
                 });
             }
             else{
