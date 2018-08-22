@@ -217,8 +217,10 @@ function handleEcho(messageId, appId, metadata) {
 }
 
 function handleApiAiAction(sender, action, responseText, contexts, parameters) {
+
     switch (action) {
         case "line-status":
+            console.log("Hi Revanna");
             if(parameters.hasOwnProperty("underground_line")&& parameters["underground_line"] != ''){
                   var request = require('request');
 
@@ -360,8 +362,6 @@ function handleApiAiResponse(sender, response) {
     let contexts = response.result.contexts;
     let parameters = response.result.parameters;
 
-    console.log("Hi Shruthi")
-
     sendTypingOff(sender);
 
     if (isDefined(messages) && (messages.length == 1 && messages[0].type != 0 || messages.length > 1)) {
@@ -398,6 +398,7 @@ function handleApiAiResponse(sender, response) {
         console.log('Unknown query' + response.result.resolvedQuery);
         sendTextMessage(sender, "I'm not sure what you want. Can you be more specific?");
     } else if (isDefined(action)) {
+        console.log("Hi Shruthi")
         handleApiAiAction(sender, action, responseText, contexts, parameters);
     } else if (isDefined(responseData) && isDefined(responseData.facebook)) {
         try {
