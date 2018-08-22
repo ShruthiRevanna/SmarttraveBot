@@ -237,19 +237,20 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                       if(!error && response.statusCode == 200){
                             //let name = Bakerloo;
                             let lineStatuses = JSON.parse(body);
-                            if (lineStatuses.hasOwnProperty("lineStatuses")) {
+                            //if (lineStatuses.hasOwnProperty("lineStatuses")) {
                                 let reply = '${[0]["lineStatuses"][0]["statusSeverityDescription"]}';
                                 sendTextMessage(sender, reply);
                                 console.log("Reply response");
                                 console.log(reply);
-                            }
-                                else{
+                            //}
+                             /*   else{
                                     sendTextMessage(sender,'No service available');
                                     console.log("Something went wrong")
-                                }
+                                }*/
                             }else{
                           console.error(response.error)
-                      }
+                          
+                       }
 
                       });
     }
