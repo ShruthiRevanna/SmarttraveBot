@@ -227,10 +227,10 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                   console.log("Inside action if statement");
 
                   request.get({
-                     url : "https://api.tfl.gov.uk/line/mode/tube/status",
+                     url : "https://api.tfl.gov.uk/line/mode/tube/status/",
                        qs  : {
-                          appid: config.TFL_API_ID,
-                          appkey: config.TFL_API_KEY,
+                          app_id: config.TFL_API_ID,
+                          app_key: config.TFL_API_KEY,
                           //qstatus: parameters["underground_line"],
                          },
                       },function(error,response,body){
