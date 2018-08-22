@@ -220,6 +220,54 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
     console.log("Inside Handle Api Ai action");
 
     switch (action) {
+        case "bus-status":
+            console.log("Inside bus-status");
+            if(parameters.hasOwnProperty("bus")&& parameters["bus"] != ''){
+                var request = require('request');
+
+                request.get({
+                    url : "https://api.tfl.gov.uk/line/mode/bus/status/",
+                    qs  : {
+                        app_id: config.TFL_API_ID,
+                        app_key: config.TFL_API_KEY,
+                        //qstatus: parameters["underground_line"],
+                    },
+                },function(error,response,body){
+                    if(!error && response.statusCode == 200){
+                        let bus_id = parameters["bus"];
+                        //let index =0;
+                        for(var bus_num=0; bus_num<30;bus_num++)
+                        {
+
+                            let bus = JSON.parse(body);
+                            if (bus[bus_num]["id"] == bus_id){
+                                let status = bus[bus_num]["lineStatuses"][0]["statusSeverityDescription"];
+
+                                if (status == "Good service") {
+                                    let reply = bus[bus_num]["lineStatuses"][0]["statusSeverityDescription"];
+                                } else if (status == "Special service"){
+                                    let reply = bus[bus_num]["lineStatuses"][0]["reason"];
+                                }
+                                sendTextMessage(sender, reply);
+
+                                console.log("Reply response");
+                                console.log(reply);
+                            }
+                           // index++;
+                        }
+                    }else{
+                        console.error(response.error)
+
+                    }
+
+                });
+            }
+            else{
+                sendTextMessage(sender, responseText);
+                console.log("Something went wrong with if statement")
+            }
+
+            break;
         case "line-status":
             console.log("Inside line-status");
             if(parameters.hasOwnProperty("underground_line")&& parameters["underground_line"] != ''){
@@ -245,11 +293,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 console.log("Reply response");
                                 console.log(reply);
                                  }
-                                /*else{
-                                    sendTextMessage(sender,'No service available');
-                                    console.log("Something went wrong")
-                                }*/
-                            }
+                             }
                       }else{
                           console.error(response.error)
 
@@ -420,7 +464,7 @@ function handleApiAiResponse(sender, response) {
         console.log('Unknown query' + response.result.resolvedQuery);
         sendTextMessage(sender, "I'm not sure what you want. Can you be more specific?");
     } else */if (isDefined(action)) {
-        console.log("Hi Shruthi")
+        //console.log("Hi Shruthi")
         handleApiAiAction(sender, action, responseText, contexts, parameters);
     } else if (isDefined(responseData) && isDefined(responseData.facebook)) {
         try {
