@@ -413,7 +413,9 @@ function handleApiAiResponse(sender, response) {
 
         }
         console.log("API output in first if");
-    } else if (responseText == '' && !isDefined(action)) {
+    }
+
+    if (responseText == '' && !isDefined(action)) {
         //api ai could not evaluate input.
         console.log('Unknown query' + response.result.resolvedQuery);
         sendTextMessage(sender, "I'm not sure what you want. Can you be more specific?");
