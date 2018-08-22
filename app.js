@@ -235,19 +235,22 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                          },
                       },function(error,response,body){
                       if(!error && response.statusCode == 200){
-                            //let name = Bakerloo;
-                            let lineStatuses = JSON.parse(body);
-                            //if (lineStatuses.hasOwnProperty("lineStatuses")) {
-                                let reply = lineStatuses[0]["lineStatuses"][0]["statusSeverityDescription"];
+                             let name = parameters["underground_line"];
+                             for(var line_num=0; line_num<10;line_num++)
+                             {
+                                let line = JSON.parse(body);
+                                if (line[line_num]["id"] == name){
+                                let reply = line[line_num]["lineStatuses"][0]["statusSeverityDescription"];
                                 sendTextMessage(sender, reply);
                                 console.log("Reply response");
                                 console.log(reply);
-                            //}
-                             /*   else{
+                                 }
+                                else{
                                     sendTextMessage(sender,'No service available');
                                     console.log("Something went wrong")
-                                }*/
-                            }else{
+                                }
+                            }
+                      }else{
                           console.error(response.error)
 
                        }
