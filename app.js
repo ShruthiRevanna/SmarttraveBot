@@ -221,6 +221,43 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
     console.log("Inside Handle Api Ai action");
 
     switch (action) {
+        case "other-train-status":
+            if(parameters.hasOwnProperty("other_train_services")&& parameters["other_train_services"] != ''){
+                var request = require('request');
+                console.log("Inside other train services");
+                request.get({
+                    url : "https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status/",
+                    qs  : {
+                        app_id: config.TFL_API_ID,
+                        app_key: config.TFL_API_KEY,
+                          },
+                },function(error,response,body){
+                    if(!error && response.statusCode == 200){
+                        let name = parameters["other_train_services"];
+                        console.log("status 200");
+                        for(var line_num=0; line_num<30;line_num++)
+                        {
+                            let line = JSON.parse(body);
+                            if (line[line_num]["name"] == name){
+                                let reply = line[line_num]["lineStatuses"][0]["statusSeverityDescription"];
+                                sendTextMessage(sender, reply);
+                                console.log("Reply response");
+
+                            }
+                        }
+                    }else{
+                        console.error(response.error)
+
+                    }
+
+                });
+            }
+            else{
+                sendTextMessage(sender, responseText);
+                console.log("Something went wrong with if statement")
+            }
+
+            break;
         case "road-status":
             if(parameters.hasOwnProperty("roads")&& parameters["roads"] != ''){
                 console.log("Parameter received");
