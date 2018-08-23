@@ -221,6 +221,45 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
     console.log("Inside Handle Api Ai action");
 
     switch (action) {
+        case "national-train-status":
+            if(parameters.hasOwnProperty("national-trains")&& parameters["national-trains"] != ''){
+                var request = require('request');
+                console.log("Inside national train services");
+                request.get({
+                    url : "https://api.tfl.gov.uk/line/mode/national-rail/status/",
+                    qs  : {
+                        app_id: config.TFL_API_ID,
+                        app_key: config.TFL_API_KEY,
+                    },
+                },function(error,response,body){
+                    if(!error && response.statusCode == 200){
+                        let name = parameters["national-trains"];
+                        console.log(name);
+
+                        for(var line_num=0; line_num<50;line_num++)
+                        {
+                            let line = JSON.parse(body);
+                            console.log(line[line_num]["name"]);
+                            if (line[line_num]["name"] == name){
+                                let reply = line[line_num]["lineStatuses"][0]["statusSeverityDescription"];
+                                sendTextMessage(sender, reply);
+                                console.log("Reply response");
+                                break;
+
+                            }
+                        }
+                    }else{
+                        console.error(response.error)
+
+                    }
+
+                });
+            }
+            else{
+                sendTextMessage(sender, responseText);
+                console.log("Something went wrong with if statement")
+            }
+            break;
         case "other-train-status":
             if(parameters.hasOwnProperty("other_train_services")&& parameters["other_train_services"] != ''){
                 var request = require('request');
