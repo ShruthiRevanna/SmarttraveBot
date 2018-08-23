@@ -342,6 +342,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                     sendTextMessage(sender, reply);
                                     console.log(reply);
                                 }
+                                break;
                             }
                         }
                     }else{
