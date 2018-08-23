@@ -244,6 +244,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 let reply = line[line_num]["lineStatuses"][0]["statusSeverityDescription"];
                                 sendTextMessage(sender, reply);
                                 console.log("Reply response");
+                                break;
 
                             }
                         }
@@ -378,6 +379,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 sendTextMessage(sender, reply);
                                 console.log("Reply response");
                                 console.log(reply);
+                                break;
                                  }
                              }
                       }else{
