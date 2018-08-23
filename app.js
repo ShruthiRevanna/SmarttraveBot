@@ -238,7 +238,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         let bus_id = parameters["bus"];
                         //let index =0;
                         console.log("Status 200");
-                        for(var bus_num=0; bus_num<30;bus_num++)
+                        for(var bus_num=0; bus_num<600;bus_num++)
                         {
                             let bus = JSON.parse(body);
                             if (bus[bus_num]["id"] == bus_id){
