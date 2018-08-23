@@ -236,7 +236,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         let name = parameters["national-trains"];
                         console.log(name);
 
-                        for(var line_num=0; line_num<50;line_num++)
+                        for(var line_num=0; line_num<10;line_num++)
                         {
                             let line = JSON.parse(body);
                             //console.log(line[line_num]["name"]);
