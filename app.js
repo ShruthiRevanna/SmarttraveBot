@@ -223,43 +223,45 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
     switch (action) {
         case "national-train-status":
             if(parameters.hasOwnProperty("national-trains")&& parameters["national-trains"] != ''){
-                console.log("Parameter received");
                 var request = require('request');
+                console.log("Inside national train services");
                 request.get({
                     url : "https://api.tfl.gov.uk/line/mode/national-rail/status/",
                     qs  : {
                         app_id: config.TFL_API_ID,
                         app_key: config.TFL_API_KEY,
-                        //qstatus: parameters["underground_line"],
                     },
                 },function(error,response,body){
                     if(!error && response.statusCode == 200){
-                        let bus_id = parameters["national-trains"];
+                        let national_id = parameters["national-trains"];
                         //let index =0;
                         console.log("Status 200");
-                        for(var bus_num=0; bus_num<50;bus_num++)
+                        let national = JSON.parse(body);
+                        for(var national_num=0; national_num<24;national_num++)
                         {
-                            let bus = JSON.parse(body);
-                            if (bus[bus_num]["id"] == bus_id){
-
-                                    let reply = bus[bus_num]["lineStatuses"][0]["statusSeverityDescription"];
-                                    console.log(reply);
-                                    sendTextMessage(sender, reply);
-
+                            var similarity = stringSimilarity.compareTwoStrings(national[national_num]["name"], national_id);
+                            console.log(national_id);
+                            console.log(national[national_num]["name"]);
+                            console.log(similarity);
+                            if (similarity === 1){
+                                let reply = national[national_num]["lineStatuses"][0]["statusSeverityDescription"];
+                                                          
+                                console.log(reply);
+                                sendTextMessage(sender, reply);
                                 break;
-                            }
+                            } ;
                         }
                     }else{
                         console.error(response.error)
+
                     }
+
                 });
             }
             else{
                 sendTextMessage(sender, responseText);
                 console.log("Something went wrong with if statement")
             }
-
-
             break;
         case "other-train-status":
             if(parameters.hasOwnProperty("other_train_services")&& parameters["other_train_services"] != ''){
