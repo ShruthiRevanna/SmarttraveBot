@@ -239,7 +239,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         for(var line_num=0; line_num<50;line_num++)
                         {
                             let line = JSON.parse(body);
-                            console.log(line[line_num]["name"]);
+                            //console.log(line[line_num]["name"]);
                             if (line[line_num]["name"] == name){
                                 let reply = line[line_num]["lineStatuses"][0]["statusSeverityDescription"];
                                 sendTextMessage(sender, reply);
