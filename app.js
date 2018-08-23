@@ -249,8 +249,10 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 console.log(similarity);
                                 if (similarity == 1) {
                                     let reply = bus[bus_num]["lineStatuses"][0]["statusSeverityDescription"];
+                                    console.log(reply);
                                 } else {
                                    let reply = bus[bus_num]["lineStatuses"][0]["reason"];
+                                    console.log(reply);
                                 }
                                  //console.log(reason);
                                 sendTextMessage(sender, reply);
