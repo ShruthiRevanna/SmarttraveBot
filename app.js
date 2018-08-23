@@ -247,12 +247,12 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 
                                 var similarity = stringSimilarity.compareTwoStrings(status, 'Good Service');
                                 console.log(similarity);
-                                if (similarity) {
+                                if (similarity == 1) {
                                     let reply = bus[bus_num]["lineStatuses"][0]["statusSeverityDescription"];
                                 } else {
                                    let reply = bus[bus_num]["lineStatuses"][0]["reason"];
                                 }
-                                 console.log(reason);
+                                 //console.log(reason);
                                 sendTextMessage(sender, reply);
 
                             }
