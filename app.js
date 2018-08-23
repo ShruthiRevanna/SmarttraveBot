@@ -221,6 +221,46 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
     console.log("Inside Handle Api Ai action");
 
     switch (action) {
+        case "road-status":
+            if(parameters.hasOwnProperty("roads")&& parameters["roads"] != ''){
+                console.log("Parameter received");
+                var request = require('request');
+                request.get({
+                    url : "https://api.tfl.gov.uk/road/",
+                    qs  : {
+                        app_id: config.TFL_API_ID,
+                        app_key: config.TFL_API_KEY,
+                        //qstatus: parameters["underground_line"],
+                    },
+                },function(error,response,body){
+                    if(!error && response.statusCode == 200){
+                        let route_id = parameters["bus"];
+                        //let index =0;
+                        console.log("Status 200");
+                        for(var route_num=0; route_num<15;route_num++)
+                        {
+                            let route = JSON.parse(body);
+                            if (route[route_num]["displayName"] == route_id){
+                                let route_status = route[route_num]["statusSeverity"];
+                                console.log(route_status);
+                                let reply = route[route_num]["statusSeverityDescription"];
+                                console.log(reply);
+                                sendTextMessage(sender, route_status);
+                                sendTextMessage(sender, reply);
+                                } ;
+                        }
+
+            }else{
+                        console.error(response.error)
+                    }
+                });
+            }
+            else{
+                sendTextMessage(sender, responseText);
+                console.log("Something went wrong with if statement")
+            }
+
+            break;
         case "bus-status":
             console.log("Inside bus-status");
             if(parameters.hasOwnProperty("bus")&& parameters["bus"] != ''){
@@ -238,7 +278,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         let bus_id = parameters["bus"];
                         //let index =0;
                         console.log("Status 200");
-                        for(var bus_num=0; bus_num<600;bus_num++)
+                        for(var bus_num=0; bus_num<800;bus_num++)
                         {
                             let bus = JSON.parse(body);
                             if (bus[bus_num]["id"] == bus_id){
@@ -256,9 +296,6 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                     sendTextMessage(sender, reply);
                                     console.log(reply);
                                 }
-                                 //console.log(reason);
-
-
                             }
                         }
                     }else{
