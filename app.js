@@ -252,6 +252,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 let reply = route[route_num]["statusSeverityDescription"];
                                 console.log(reply);
                                 sendTextMessage(sender, reply);
+                                break;
                             } ;
                         }
 
