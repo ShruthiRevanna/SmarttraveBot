@@ -246,7 +246,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 if (status == "Good service") {
                                     let reply = bus[bus_num]["lineStatuses"][0]["statusSeverityDescription"];
                                 } else if (status == "Special service"){
-                                    let reply = bus[bus_num]["lineStatuses"][0]["reason"];
+                                   // let reply = bus[bus_num]["lineStatuses"][0]["reason"];
                                 }
                                 sendTextMessage(sender, reply);
                                 console.log("Reply response");
