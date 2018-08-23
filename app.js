@@ -235,10 +235,11 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     if(!error && response.statusCode == 200){
                         let name = parameters["other_train_services"];
                         console.log(name);
-                        
+
                         for(var line_num=0; line_num<30;line_num++)
                         {
                             let line = JSON.parse(body);
+                            sonsole.log(line[line_num]["id"]);
                             if (line[line_num]["id"] == name){
                                 let reply = line[line_num]["lineStatuses"][0]["statusSeverityDescription"];
                                 sendTextMessage(sender, reply);
