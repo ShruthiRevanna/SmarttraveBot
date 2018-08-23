@@ -237,9 +237,9 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         let route_id = parameters["roads"];
                         //let index =0;
                         console.log("Status 200");
+                        let route = JSON.parse(body);
                         for(var route_num=0; route_num<15;route_num++)
                         {
-                            let route = JSON.parse(body);
                             var similarity = stringSimilarity.compareTwoStrings(route[route_num]["displayName"], route_id);
                             console.log(route_id);
                             console.log(route[route_num]["displayName"]);
@@ -251,7 +251,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 let reply = route[route_num]["statusSeverityDescription"];
                                 console.log(reply);
                                 sendTextMessage(sender, reply);
-                                } ;
+                            } ;
                         }
 
             }else{
