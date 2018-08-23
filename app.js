@@ -439,7 +439,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
         case "faq-delivery":
             console.log("inside faq delivry")
 
-            setTimeout( function (){
+            //setTimeout( function (){
                 let buttons = [
                     {
                         type: "postback",
@@ -454,7 +454,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 ];
                 console.log("what can i do")
                 sendButtonMessage(sender,"what would you like to de next",buttons);
-            },3000)
+           // },3000)
             break;
         default:
             //unhandled action, just send back the text
