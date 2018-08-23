@@ -234,7 +234,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 },function(error,response,body){
                     if(!error && response.statusCode == 200){
                         let name = parameters["other_train_services"];
-                        console.log("status 200");
+                        console.log(name);
+                        console.log(line[line_num]["id"]);
                         for(var line_num=0; line_num<30;line_num++)
                         {
                             let line = JSON.parse(body);
