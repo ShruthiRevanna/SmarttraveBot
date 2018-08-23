@@ -243,7 +243,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                             var similarity = stringSimilarity.compareTwoStrings(route[route_num]["displayName"], route_id);
                             console.log(route_id);
                             console.log(route[route_num]["displayName"]);
-                            console.similarity(similarity);
+                            console.log(similarity);
                             if (similarity === 1){
                                 let route_status = route[route_num]["statusSeverity"];
                                 console.log(route_status);
