@@ -400,7 +400,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             break;
         case "line-status":
             console.log("Inside line-status");
-            if(parameters.hasOwnProperty("underground_line")&& parameters["underground_line"] != ''){
+            //if(parameters.hasOwnProperty("underground_line")&& parameters["underground_line"] != ''){
                   var request = require('request');
                   console.log("Inside action if statement");
 
@@ -426,16 +426,14 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                  }
                              }
                       }else{
-                          console.error(response.error)
-
+                         console.error(response.error)
                        }
-
                       });
-    }
-            else{
+    //}
+          /*  else{
                 sendTextMessage(sender, responseText);
                 console.log("Something went wrong with if statement")
-            }
+            }*/
 
             break;
         case "faq-delivery":
