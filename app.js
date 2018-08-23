@@ -248,7 +248,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 let route_status = route[route_num]["statusSeverity"];
                                 console.log(route_status);
 
-                                sendTextMessage(sender, route_status);
+                               // sendTextMessage(sender, route_status);
                                 let reply = route[route_num]["statusSeverityDescription"];
                                 console.log(reply);
                                 sendTextMessage(sender, reply);
