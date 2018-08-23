@@ -240,12 +240,15 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         for(var route_num=0; route_num<15;route_num++)
                         {
                             let route = JSON.parse(body);
-                            if (route[route_num]["displayName"] == route_id){
+                            var similarity = stringSimilarity.compareTwoStrings(route[route_num]["displayName"], route_id);
+
+                            if (similarity === 1){
                                 let route_status = route[route_num]["statusSeverity"];
                                 console.log(route_status);
+
+                                sendTextMessage(sender, route_status);
                                 let reply = route[route_num]["statusSeverityDescription"];
                                 console.log(reply);
-                                sendTextMessage(sender, route_status);
                                 sendTextMessage(sender, reply);
                                 } ;
                         }
