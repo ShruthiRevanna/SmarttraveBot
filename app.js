@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const app = express();
 const uuid = require('uuid');
+var stringSimilarity = require('string-similarity');
 
 
 // Messenger API parameters
@@ -244,9 +245,11 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 let status = bus[bus_num]["lineStatuses"][0]["statusSeverityDescription"];
                                 console.log(status);
 
-                                 if (status.toString() == 'Good Service') {
+                                var similarity = stringSimilarity.compareTwoStrings(status, 'Good Service');
+                                console.log(similarity);
+                                if (similarity) {
                                     let reply = bus[bus_num]["lineStatuses"][0]["statusSeverityDescription"];
-                                } else if (status.toString().trim()  == 'Special service'){
+                                } else {
                                    let reply = bus[bus_num]["lineStatuses"][0]["reason"];
                                 }
                                  console.log(reason);
