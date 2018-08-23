@@ -235,10 +235,10 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     if(!error && response.statusCode == 200){
                         let name = parameters["national-trains"];
                         console.log(name);
-
+                        let line = JSON.parse(body);
                         for(var line_num=0; line_num<10;line_num++)
                         {
-                            let line = JSON.parse(body);
+
                             //console.log(line[line_num]["name"]);
                             if (line[line_num]["name"] == name){
                                 let reply = line[line_num]["lineStatuses"][0]["statusSeverityDescription"];
