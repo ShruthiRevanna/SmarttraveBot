@@ -243,10 +243,11 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                             if (bus[bus_num]["id"] == bus_id){
                                 let status = bus[bus_num]["lineStatuses"][0]["statusSeverityDescription"];
                                 console.log(status);
-                                if (status == "Good service") {
+                                console.log(reason);
+                                if (status == "Good Service") {
                                     let reply = bus[bus_num]["lineStatuses"][0]["statusSeverityDescription"];
                                 } else if (status == "Special service"){
-                                   // let reply = bus[bus_num]["lineStatuses"][0]["reason"];
+                                    let reply = bus[bus_num]["lineStatuses"][0]["reason"];
                                 }
                                 sendTextMessage(sender, reply);
                                 console.log("Reply response");
