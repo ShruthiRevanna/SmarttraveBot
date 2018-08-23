@@ -437,8 +437,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 
             break;
         case "faq-delivery":
-            sendTextMessage(sender, responseText);
-            sendTypingOn(sender);
+            console.log("inside faq delivry")
+
             setTimeout( function (){
                 let buttons = [
                     {
@@ -452,6 +452,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         title: "visit_us_on"
                     }
                 ];
+                console.log("what can i do")
                 sendButtonMessage(sender,"what would you like to de next",buttons);
             },3000)
             break;
