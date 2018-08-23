@@ -244,12 +244,12 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 let status = bus[bus_num]["lineStatuses"][0]["statusSeverityDescription"];
                                 console.log(status);
 
-                                if (status == "Good Service") {
+                               // if (status == "Good Service") {
                                     let reply = bus[bus_num]["lineStatuses"][0]["statusSeverityDescription"];
-                                } //else if (status == "Special service"){
-                                  //  let reply = bus[bus_num]["lineStatuses"][0]["reason"];
+                               // } else if (status == "Special service"){
+                                   let reply = bus[bus_num]["lineStatuses"][0]["reason"];
                                // }
-                                // console.log(reason);
+                                 console.log(reason);
                                 sendTextMessage(sender, reply);
                                 console.log("Reply response");
                                 console.log(reply);
