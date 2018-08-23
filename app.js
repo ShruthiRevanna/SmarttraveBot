@@ -238,11 +238,12 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         //let index =0;
                         console.log("Status 200");
                         let route = JSON.parse(body);
-                        for(var route_num=0; route_num<15;route_num++)
+                        for(var route_num=0; route_num<10;route_num++)
                         {
                             var similarity = stringSimilarity.compareTwoStrings(route[route_num]["displayName"], route_id);
                             console.log(route_id);
                             console.log(route[route_num]["displayName"]);
+                            console.similarity(similarity);
                             if (similarity === 1){
                                 let route_status = route[route_num]["statusSeverity"];
                                 console.log(route_status);
