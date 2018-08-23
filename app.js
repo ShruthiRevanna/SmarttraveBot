@@ -238,7 +238,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         //let index =0;
                         console.log("Status 200");
                         let route = JSON.parse(body);
-                        for(var route_num=0; route_num<25;route_num++)
+                        for(var route_num=0; route_num<24;route_num++)
                         {
                             var similarity = stringSimilarity.compareTwoStrings(route[route_num]["displayName"], route_id);
                             console.log(route_id);
