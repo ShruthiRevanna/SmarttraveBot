@@ -234,7 +234,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     },
                 },function(error,response,body){
                     if(!error && response.statusCode == 200){
-                        let route_id = parameters["bus"];
+                        let route_id = parameters["roads"];
                         //let index =0;
                         console.log("Status 200");
                         for(var route_num=0; route_num<15;route_num++)
