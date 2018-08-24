@@ -221,6 +221,58 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
     console.log("Inside Handle Api Ai action");
 
     switch (action) {
+        case"arrival-status":
+            if(parameters.hasOwnProperty("destination")&& parameters["destination"] != ''){
+                console.log("Parameter received");
+                var request = require('request');
+                request.get({
+                    url : "https://api.tfl.gov.uk/StopPoint/490005183E/arrivals/",
+                    qs  : {
+                        app_id: config.TFL_API_ID,
+                        app_key: config.TFL_API_KEY,
+                        //qstatus: parameters["underground_line"],
+                    },
+                },function(error,response,body){
+                    if(!error && response.statusCode == 200){
+                        let dest_param = parameters["destination"];
+
+                        console.log("Status 200");
+                        let destination = JSON.parse(body);
+                        for(var dest_num=0; dest_num<10;dest_num++)
+                        {
+                            var similarity = stringSimilarity.compareTwoStrings(destination[dest_num]["destinationName"], dest_param);
+                            console.log(dest_param);
+                            console.log(destination[dest_num]["destinationName"]);
+                            console.log(similarity);
+                            if (similarity === 1){
+                                let towards = destination[dest_num]["towards"];
+                                console.log(towards);
+                                sendTextMessage(sender, "Bus is towards");
+                                sendTextMessage(sender, towards);
+
+                                let expectedArrival = destination[dest_num]["expectedArrival"];
+                                console.log(expectedArrival);
+                                sendTextMessage(sender,"Bus will expected to arrive at");
+                                sendTextMessage(sender, expectedArrival);
+
+                                setTimeout( function (){
+                                    sendTextMessage(sender, "I hope you have got the information needed. Do you need any further information? yes/no");
+                                },3000)
+                                break;
+                            } ;
+                        }
+
+                    }else{
+                        console.error(response.error)
+                    }
+                });
+            }
+            else{
+                sendTextMessage(sender, responseText);
+                console.log("Something went wrong with if statement")
+            }
+
+            break;
         case "national-train-status":
             if(parameters.hasOwnProperty("national-trains")&& parameters["national-trains"] != ''){
                 var request = require('request');
