@@ -255,7 +255,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 let expectedArrival = destination[dest_num]["expectedArrival"];
                                 console.log(expectedArrival);
                                 setTimeout( function (){
-                                sendTextMessage(sender,"Bus will expected to arrive at "+ expectedArrival);
+                                sendTextMessage(sender,"Bus will expected to arrive at "+ expectedArrival.slice(11,18));
                                 //sendTextMessage(sender, expectedArrival);
                                 },3000)
 
