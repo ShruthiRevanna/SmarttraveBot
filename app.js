@@ -248,6 +248,10 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                                           
                                 console.log(reply);
                                 sendTextMessage(sender, reply);
+
+                                setTimeout( function (){
+                                    sendTextMessage(sender, "Do you need any further information?");
+                                },3000)
                                 break;
                             } ;
                         }
