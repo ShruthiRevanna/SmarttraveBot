@@ -248,8 +248,9 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 let towards = destination[dest_num]["towards"];
                                 console.log(towards);
                                 setTimeout( function (){
+                                    sendTextMessage(sender, towards);
                                 sendTextMessage(sender, "Bus is towards");
-                                sendTextMessage(sender, towards);
+
                                 },2000)
                                 let expectedArrival = destination[dest_num]["expectedArrival"];
                                 console.log(expectedArrival);
