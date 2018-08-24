@@ -249,14 +249,14 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 console.log(towards);
                                 setTimeout( function (){
                                     //sendTextMessage(sender, towards);
-                                sendTextMessage(sender, "Bus is towards" & towards);
+                                sendTextMessage(sender, "Bus is towards "+ towards);
 
                                 },2000)
                                 let expectedArrival = destination[dest_num]["expectedArrival"];
                                 console.log(expectedArrival);
                                 setTimeout( function (){
-                                sendTextMessage(sender,"Bus will expected to arrive at");
-                                sendTextMessage(sender, expectedArrival);
+                                sendTextMessage(sender,"Bus will expected to arrive at "+ expectedArrival);
+                                //sendTextMessage(sender, expectedArrival);
                                 },3000)
 
 
