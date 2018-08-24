@@ -236,7 +236,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     if(!error && response.statusCode == 200){
                         let dest_param = parameters["destination"];
 
-                        console.log("Status 200");
+                        //console.log("Status 200");
                         let destination = JSON.parse(body);
                         for(var dest_num=0; dest_num<10;dest_num++)
                         {
