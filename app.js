@@ -250,7 +250,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 sendTextMessage(sender, reply);
 
                                 setTimeout( function (){
-                                    sendTextMessage(sender, "I hope the information is helpful.Do you need any further information? yes/no");
+                                    sendTextMessage(sender, "I hope the information is helpful. Do you need any further information? yes/no");
                                 },3000)
                                 break;
                             } ;
@@ -291,7 +291,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 sendTextMessage(sender, reply);
                                 console.log("Reply response");
                                 setTimeout( function (){
-                                    sendTextMessage(sender, "I hope this helps.Do you need any further asistance? yes/no");
+                                    sendTextMessage(sender, "I hope this helps. Do you need any further assistance? yes/no");
                                 },3000)
 
                                 break;
@@ -344,7 +344,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 console.log(reply);
                                 sendTextMessage(sender, reply);
                                 setTimeout( function (){
-                                    sendTextMessage(sender, "I hope you have got the information needed.Do you need any further information? yes/no");
+                                    sendTextMessage(sender, "I hope you have got the information needed. Do you need any further information? yes/no");
                                 },3000)
                                 break;
                             } ;
@@ -397,7 +397,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                     console.log(reply);
                                 }
                                 setTimeout( function (){
-                                    sendTextMessage(sender, "I hope you are satisfied.Would you like to continue? yes/no");
+                                    sendTextMessage(sender, "I hope you are satisfied. Would you like to continue? yes/no");
                                 },3000)
                                 break;
                             }
@@ -438,7 +438,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 console.log("Reply response");
                                 console.log(reply);
                                     setTimeout( function (){
-                                        sendTextMessage(sender, "I hope you find the helpful.Do you need any further information? yes/no");
+                                        sendTextMessage(sender, "I hope you find the helpful. Do you need any further information? yes/no");
                                     },3000)
                                 break;
                                  }
