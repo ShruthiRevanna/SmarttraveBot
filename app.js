@@ -247,8 +247,10 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                             if (similarity === 1){
                                 let towards = destination[dest_num]["towards"];
                                 console.log(towards);
+                                setTimeout( function (){
                                 sendTextMessage(sender, "Bus is towards");
                                 sendTextMessage(sender, towards);
+                                },2000)
                                 let expectedArrival = destination[dest_num]["expectedArrival"];
                                 console.log(expectedArrival);
                                 setTimeout( function (){
