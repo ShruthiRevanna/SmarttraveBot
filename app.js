@@ -10,6 +10,22 @@ const app = express();
 const uuid = require('uuid');
 var stringSimilarity = require('string-similarity');
 
+const product = require('./app/routes/node.route'); // Imports routes for the products
+//const app = express();
+
+// Set up mongoose connection
+const mongoose = require('mongoose');
+//let dev_db_url = 'mongodb://someuser:abcd1234@ds123619.mlab.com:23619/productstutorial';
+let dev_db_url = 'mongodb://shruthi:LSBU123@ds259410.mlab.com:59410/products-app';
+const mongoDB = process.env.PORT || dev_db_url;
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use('/products', product);
 
 // Messenger API parameters
 if (!config.FB_PAGE_TOKEN) {
@@ -311,12 +327,15 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 },3000)
                                 //app.post('/', function(req, res) {
                                     // Insert JSON straight into MongoDB
-                                    db.collection('product').insert(reply, function (err, result) {
-                                        if (err)
-                                            res.send('Error');
-                                        else
-                                            res.send('Success');
+                                var myobj = { line:national[national_num]["name"],
+                                              status:reply
 
+                                }
+                                    db.collection('products').insertOne(myobj, function (err, res) {
+                                        if (err)
+                                            console.log('Error in document inserting');
+                                        else
+                                            console.log('Document inserted');
                                     });
                                 break;
                             } ;
@@ -1239,24 +1258,6 @@ function isDefined(obj) {
 
     return obj != null;
 }
-
-
-const product = require('./app/routes/node.route'); // Imports routes for the products
-//const app = express();
-
-// Set up mongoose connection
-const mongoose = require('mongoose');
-//let dev_db_url = 'mongodb://someuser:abcd1234@ds123619.mlab.com:23619/productstutorial';
-let dev_db_url = 'mongodb://shruthi:LSBU123@ds259410.mlab.com:59410/products-app';
-const mongoDB = process.env.PORT || dev_db_url;
-mongoose.connect(mongoDB);
-mongoose.Promise = global.Promise;
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
-app.use('/products', product);
 
 
 const PORT = process.env.PORT || 3000;
