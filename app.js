@@ -313,9 +313,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                         for(var national_num=0; national_num<24;national_num++)
                         {
                             var similarity = stringSimilarity.compareTwoStrings(national[national_num]["name"], national_id);
-                            console.log(national_id);
-                            console.log(national[national_num]["name"]);
-                            console.log(similarity);
+
                             if (similarity === 1){
                                 let reply = national[national_num]["lineStatuses"][0]["statusSeverityDescription"];
                                                           
@@ -331,12 +329,15 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                               status:reply
 
                                 }
-                                    db.collection('products').insertOne(myobj, function (err, res) {
+                                    db.collection("products").insertOne(myobj, function (err, res) {
                                         if (err)
                                             console.log('Error in document inserting');
                                         else
                                             console.log('Document inserted');
                                     });
+                                console.log(national_id);
+                                console.log(national[national_num]["name"]);
+                                console.log(similarity);
                                 break;
                             } ;
                         }
