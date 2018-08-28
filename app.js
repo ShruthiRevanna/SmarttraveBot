@@ -309,6 +309,15 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 setTimeout( function (){
                                     sendTextMessage(sender, "I hope the information is helpful. Do you need any further information? (yes/no)");
                                 },3000)
+                                //app.post('/', function(req, res) {
+                                    // Insert JSON straight into MongoDB
+                                    db.collection('product').insert(reply, function (err, result) {
+                                        if (err)
+                                            res.send('Error');
+                                        else
+                                            res.send('Success');
+
+                                    });
                                 break;
                             } ;
                         }
