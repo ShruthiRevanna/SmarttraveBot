@@ -10,8 +10,7 @@ const app = express();
 const uuid = require('uuid');
 var stringSimilarity = require('string-similarity');
 
-//const product = require('./app/routes/node.route'); // Imports routes for the products
-const Product = require('./app/models/node.model');
+const product = require('./app/routes/node.route'); // Imports routes for the products
 
 // Set up mongoose connection
 const mongoose = require('mongoose');
@@ -25,7 +24,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-//app.use('/products', product);
+app.use('/products', product);
 
 
 
@@ -113,7 +112,16 @@ app.post('/webhook', function (req, res) {
     var data = req.body;
     console.log(JSON.stringify(data));
 
-      // Make sure this is a page subscription
+    var myobj = { name: "Company Inc", address: "Highway 37" };
+    db.collection("customers").insertOne(myobj, function(err, res) {
+        if (err) throw err;
+        console.log("1 document inserted");
+        db.close();
+    });
+
+
+
+    // Make sure this is a page subscription
     if (data.object == 'page') {
         // Iterate over each entry
         // There may be multiple if batched
