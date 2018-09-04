@@ -327,8 +327,9 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                     // Insert JSON straight into MongoDB
                                 var myobj = { line:national[national_num]["name"],
                                               status:reply
-
-                                }
+                                      }
+                                    console.log(myobj.line,'\n');
+                                    console.log(myobj.status,'\n');
                                     db.collection("products").insertOne(myobj, function (err, res) {
                                         if (err)
                                             console.log('Error in document inserting');
