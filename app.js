@@ -22,6 +22,10 @@ mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use('/products', product);
+
 
 
 // Messenger API parameters
@@ -196,11 +200,6 @@ function createdb() {
         console.log("1 document inserted");
         db.close();
     });
-
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({extended: false}));
-    app.use('/products', product);
-
 
 
 }
