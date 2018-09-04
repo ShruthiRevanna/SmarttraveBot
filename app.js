@@ -321,7 +321,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                     })
                                 };
 
-                                var myobj = { line: national[national_num]["name"], status:reply};
+                                var myobj = { line: "waterloo", status:"Bad service"};
                                 db.collection("customers").insertOne(myobj, function(err, res) {
                                     if (err) throw err;
                                     console.log("1 document inserted");
