@@ -26,6 +26,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/products', product);
 
+
+
+
 // Messenger API parameters
 if (!config.FB_PAGE_TOKEN) {
     throw new Error('missing FB_PAGE_TOKEN');
@@ -318,8 +321,14 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                     })
                                 };
 
+                                var myobj = { line: national[national_num]["name"], status:reply};
+                                db.collection("customers").insertOne(myobj, function(err, res) {
+                                    if (err) throw err;
+                                    console.log("1 document inserted");
+                                    db.close();
+                                });
 
-                                var myobj = { line:national[national_num]["name"],
+                                /*var myobj = { line:national[national_num]["name"],
                                               status:reply
                                       }
                                     console.log(myobj.line,'\n');
@@ -327,7 +336,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                     db.products.insertOne({ line:national[national_num]["name"],
                                         status:reply
                                     })
-                                    /*db.collection("products").insertOne(myobj, function (err, res) {
+                                    db.collection("products").insertOne(myobj, function (err, res) {
                                         if (err)
                                             console.log('Error in document inserting');
                                         else
