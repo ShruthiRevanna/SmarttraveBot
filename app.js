@@ -11,11 +11,21 @@ const uuid = require('uuid');
 var stringSimilarity = require('string-similarity');
 
 const product = require('./app/routes/node.route'); // Imports routes for the products
-const Product = require('./app/models/node.model');
+//const Product = require('./app/models/node.model');
 
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var bugSchema = new Schema({
+      line: String,
+         status: String,
+         Genus: String
+ });
+
+ var Bug = mongoose.model("Bug", bugSchema);
 
 // Set up mongoose connection
-const mongoose = require('mongoose');
+//const mongoose = require('mongoose');
 //let dev_db_url = 'mongodb://someuser:abcd1234@ds123619.mlab.com:23619/productstutorial';
 let dev_db_url = 'mongodb://shruthi:LSBU123@ds259410.mlab.com:59410/products-app';
 const mongoDB = process.env.PORT || dev_db_url;
@@ -28,8 +38,22 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/products', product);
 
+var flag = 0;
 
+if(flag == 1) {
+    var Bee = new Bug({
+        bugName: "Scruffy",
+        bugColour: "Orange",
+        Genus: "Bombus"
+    });
 
+    Bee.save(function (error) {
+        console.log("Your bee has been saved!");
+        if (error) {
+            console.error(error);
+        }
+    });
+}
 // Messenger API parameters
 if (!config.FB_PAGE_TOKEN) {
     throw new Error('missing FB_PAGE_TOKEN');
@@ -308,20 +332,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                                           
                                 console.log(reply);
                                 sendTextMessage(sender, reply);
-                               let product = new Product(
-                                {
-                                    line: national[national_num]["name"] ,
-                                        status: reply
-                                }
-                            );
-
-                                product.save(function (err) {
-                                    if (err) {
-                                        return (err);
-                                    }
-                                    res.send('Product Created successfully')
-                                })
-                                setTimeout( function (){
+                               flag =1;
+                                       setTimeout( function (){
                                     sendTextMessage(sender, "I hope the information is helpful. Do you need any further information? (yes/no)");
                                 },3000)
 
