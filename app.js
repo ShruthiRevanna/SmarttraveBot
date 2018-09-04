@@ -193,7 +193,16 @@ function receivedMessage(event) {
     }
 }
 
+function createdb() {
+    var myobj = { name: "Company Inc", address: "Highway 37" };
+    dbo.collection("customers").insertOne(myobj, function(err, res) {
+        if (err) throw err;
+        console.log("1 document inserted");
+        db.close();
+    });
 
+
+}
 function handleMessageAttachments(messageAttachments, senderID){
     //for now just reply
     sendTextMessage(senderID, "Attachment received. Thank you.");
@@ -304,14 +313,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                                           
                                 console.log(reply);
                                 sendTextMessage(sender, reply);
-                                var myobj = { name: "Company Inc", address: "Highway 37" };
-                                db.collection("customers").insertOne(myobj, function(err, res) {
-                                    console.log("Inside db");
-                                    if (err) throw err;
-                                    console.log("1 document inserted");
-                                    db.close();
-                                });
-
+                                createdb();
                                 setTimeout( function (){
                                     sendTextMessage(sender, "I hope the information is helpful. Do you need any further information? (yes/no)");
                                 },3000)
