@@ -11,7 +11,6 @@ const uuid = require('uuid');
 var stringSimilarity = require('string-similarity');
 
 const product = require('./app/routes/node.route'); // Imports routes for the products
-//const app = express();
 
 // Set up mongoose connection
 const mongoose = require('mongoose');
@@ -51,27 +50,6 @@ if (!config.TFL_API_KEY) { //used for ink to static files
 if (!config.TFL_API_ID) { //used for ink to static files
     throw new Error('Missing TFL API ID');
 }
-
-
-
-
-//app.set('port', (process.env.PORT || 5000))
-
-//verify request came from facebook
-app.use(bodyParser.json({
-    verify: verifyRequestSignature
-}));
-
-//serve static files in the public directory
-app.use(express.static('public'));
-
-// Process application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({
-    extended: false
-}))
-
-// Process application/json
-app.use(bodyParser.json())
 
 
 
@@ -336,9 +314,9 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                         else
                                             console.log('Document inserted');
                                     });
-                                console.log(national_id);
-                                console.log(national[national_num]["name"]);
-                                console.log(similarity);
+                               // console.log(national_id);
+                               // console.log(national[national_num]["name"]);
+                               // console.log(similarity);
                                 break;
                             } ;
                         }
@@ -1261,11 +1239,11 @@ function isDefined(obj) {
     return obj != null;
 }
 
-
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Our app is running on port ${ PORT }`);
 });
+
 
 /*app.listen(process.env.PORT || 3000, function(){
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
