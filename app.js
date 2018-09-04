@@ -22,10 +22,6 @@ mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
-app.use('/products', product);
-
 
 
 // Messenger API parameters
@@ -201,6 +197,11 @@ function createdb() {
         db.close();
     });
 
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({extended: false}));
+    app.use('/products', product);
+
+
 
 }
 function handleMessageAttachments(messageAttachments, senderID){
@@ -223,12 +224,6 @@ function handleEcho(messageId, appId, metadata) {
 
 function handleApiAiAction(sender, action, responseText, contexts, parameters) {
     console.log("Inside Handle Api Ai action");
-    var myobj = { name: "Company Inc", address: "Highway 37" };
-    db.collection("customers").insertOne(myobj, function(err, res) {
-        if (err) throw err;
-        console.log("1 document inserted");
-        db.close();
-    });
     console.log(myobj.address);
     switch (action) {
         case"arrival-status":
