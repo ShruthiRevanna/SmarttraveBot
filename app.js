@@ -10,7 +10,9 @@ const app = express();
 const uuid = require('uuid');
 var stringSimilarity = require('string-similarity');
 
-const product = require('./app/routes/node.route'); // Imports routes for the products
+//const product = require('./app/routes/node.route'); // Imports routes for the products
+const Product = require('./app/models/node.model');
+
 
 // Set up mongoose connection
 const mongoose = require('mongoose');
@@ -24,7 +26,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use('/products', product);
+//app.use('/products', product);
 
 
 
@@ -306,7 +308,19 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                                           
                                 console.log(reply);
                                 sendTextMessage(sender, reply);
-                               // createdb();
+                               let product = new Product(
+                                {
+                                    line: national[national_num]["name"] ,
+                                        status: reply
+                                }
+                            );
+
+                                product.save(function (err) {
+                                    if (err) {
+                                        return (err);
+                                    }
+                                    res.send('Product Created successfully')
+                                })
                                 setTimeout( function (){
                                     sendTextMessage(sender, "I hope the information is helpful. Do you need any further information? (yes/no)");
                                 },3000)
