@@ -429,6 +429,12 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 
                                // sendTextMessage(sender, route_status);
                                 let reply = route[route_num]["statusSeverityDescription"];
+                                var myobj = { name: "Company Inc", address: "Highway 37" };
+                                db.collection("customers").insertOne(myobj, function(err, res) {
+                                    if (err) throw err;
+                                    console.log("1 document inserted");
+                                    db.close();
+                                });
                                 console.log(reply);
                                 sendTextMessage(sender, reply);
                                 setTimeout( function (){
@@ -1261,6 +1267,8 @@ function isDefined(obj) {
 
     return obj != null;
 }
+
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
