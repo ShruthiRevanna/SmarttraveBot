@@ -300,7 +300,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 console.log(reply);
                                 sendTextMessage(sender, reply);
                                 var myobj = { name: "Company Inc", address: "Highway 37" };
-                                dbo.collection("customers").insertOne(myobj, function(err, res) {
+                                db.collection("customers").insertOne(myobj, function(err, res) {
                                     console.log("Inside db");
                                     if (err) throw err;
                                     console.log("1 document inserted");
