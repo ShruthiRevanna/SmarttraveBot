@@ -220,7 +220,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
         console.log("1 document inserted");
         db.close();
     });
-
+    console.log(myobj.address);
     switch (action) {
         case"arrival-status":
             if(parameters.hasOwnProperty("destination")&& parameters["destination"] != ''){
