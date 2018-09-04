@@ -112,13 +112,6 @@ app.post('/webhook', function (req, res) {
     var data = req.body;
     console.log(JSON.stringify(data));
 
-    var myobj = { name: "Company Inc", address: "Highway 37" };
-    db.collection("customers").insertOne(myobj, function(err, res) {
-        if (err) throw err;
-        console.log("1 document inserted");
-        db.close();
-    });
-
 
 
     // Make sure this is a page subscription
@@ -313,7 +306,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                                           
                                 console.log(reply);
                                 sendTextMessage(sender, reply);
-                                createdb();
+                               // createdb();
                                 setTimeout( function (){
                                     sendTextMessage(sender, "I hope the information is helpful. Do you need any further information? (yes/no)");
                                 },3000)
