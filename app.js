@@ -324,7 +324,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                       }
                                     console.log(myobj.line,'\n');
                                     console.log(myobj.status,'\n');
-                                    db.products.insert({ line:national[national_num]["name"],
+                                    db.products.insertOne({ line:national[national_num]["name"],
                                         status:reply
                                     })
                                     /*db.collection("products").insertOne(myobj, function (err, res) {
