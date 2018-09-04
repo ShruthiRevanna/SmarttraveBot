@@ -54,12 +54,6 @@ if (!config.TFL_API_ID) { //used for ink to static files
     throw new Error('Missing TFL API ID');
 }
 
-var myobj = { line: "waterloo", status:"Bad service"};
-db.collection("customers").insertOne(myobj, function(err, res) {
-    if (err) throw err;
-    console.log("1 document inserted");
-    db.close();
-});
 
 
 const apiAiService = apiai(config.API_AI_CLIENT_ACCESS_TOKEN, {
@@ -305,6 +299,13 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                                           
                                 console.log(reply);
                                 sendTextMessage(sender, reply);
+                                var myobj = { name: "Company Inc", address: "Highway 37" };
+                                dbo.collection("customers").insertOne(myobj, function(err, res) {
+                                    console.log("Inside db");
+                                    if (err) throw err;
+                                    console.log("1 document inserted");
+                                    db.close();
+                                });
 
                                 setTimeout( function (){
                                     sendTextMessage(sender, "I hope the information is helpful. Do you need any further information? (yes/no)");
@@ -369,6 +370,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 sendTextMessage(sender, reply);
                                 console.log("Reply response");
 
+
                                 setTimeout( function (){
                                     sendTextMessage(sender, "I hope this helps. Do you need any further assistance? (yes/no)");
                                 },3000)
@@ -389,12 +391,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 sendTextMessage(sender, responseText);
                 console.log("Something went wrong with if statement")
             }
-            var myobj = { line: "victoria", status:"Good service"};
-            db.collection("customers").insertOne(myobj, function(err, res) {
-                if (err) throw err;
-                console.log("1 document inserted");
-                db.close();
-            });
+
             break;
         case "road-status":
             if(parameters.hasOwnProperty("roads")&& parameters["roads"] != ''){
