@@ -310,21 +310,6 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                     sendTextMessage(sender, "I hope the information is helpful. Do you need any further information? (yes/no)");
                                 },3000)
 
-                                exports.product_create = function (req, res) {
-                                    let product = new Product(
-                                        {
-                                            line: req.body.line,
-                                            status: req.body.status
-                                        }
-                                    );
-
-                                    product.save(function (err) {
-                                        if (err) {
-                                            return (err);
-                                        }
-                                        res.send('Product Created successfully')
-                                    })
-                                };
 
 
 
@@ -383,12 +368,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 let reply = line[line_num]["lineStatuses"][0]["statusSeverityDescription"];
                                 sendTextMessage(sender, reply);
                                 console.log("Reply response");
-                                var myobj = { line: "victoria", status:"Good service"};
-                                db.collection("customers").insertOne(myobj, function(err, res) {
-                                    if (err) throw err;
-                                    console.log("1 document inserted");
-                                    db.close();
-                                });
+
                                 setTimeout( function (){
                                     sendTextMessage(sender, "I hope this helps. Do you need any further assistance? (yes/no)");
                                 },3000)
@@ -409,7 +389,12 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                 sendTextMessage(sender, responseText);
                 console.log("Something went wrong with if statement")
             }
-
+            var myobj = { line: "victoria", status:"Good service"};
+            db.collection("customers").insertOne(myobj, function(err, res) {
+                if (err) throw err;
+                console.log("1 document inserted");
+                db.close();
+            });
             break;
         case "road-status":
             if(parameters.hasOwnProperty("roads")&& parameters["roads"] != ''){
