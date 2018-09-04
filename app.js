@@ -195,7 +195,7 @@ function receivedMessage(event) {
 
 function createdb() {
     var myobj = { name: "Company Inc", address: "Highway 37" };
-    dbo.collection("customers").insertOne(myobj, function(err, res) {
+    db.collection("customers").insertOne(myobj, function(err, res) {
         if (err) throw err;
         console.log("1 document inserted");
         db.close();
