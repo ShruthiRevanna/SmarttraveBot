@@ -54,7 +54,12 @@ if (!config.TFL_API_ID) { //used for ink to static files
     throw new Error('Missing TFL API ID');
 }
 
-
+var myobj = { line: "waterloo", status:"Bad service"};
+db.collection("customers").insertOne(myobj, function(err, res) {
+    if (err) throw err;
+    console.log("1 document inserted");
+    db.close();
+});
 
 
 const apiAiService = apiai(config.API_AI_CLIENT_ACCESS_TOKEN, {
@@ -321,12 +326,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                     })
                                 };
 
-                                var myobj = { line: "waterloo", status:"Bad service"};
-                                db.collection("customers").insertOne(myobj, function(err, res) {
-                                    if (err) throw err;
-                                    console.log("1 document inserted");
-                                    db.close();
-                                });
+
 
                                 /*var myobj = { line:national[national_num]["name"],
                                               status:reply
@@ -383,6 +383,12 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 let reply = line[line_num]["lineStatuses"][0]["statusSeverityDescription"];
                                 sendTextMessage(sender, reply);
                                 console.log("Reply response");
+                                var myobj = { line: "victoria", status:"Good service"};
+                                db.collection("customers").insertOne(myobj, function(err, res) {
+                                    if (err) throw err;
+                                    console.log("1 document inserted");
+                                    db.close();
+                                });
                                 setTimeout( function (){
                                     sendTextMessage(sender, "I hope this helps. Do you need any further assistance? (yes/no)");
                                 },3000)
