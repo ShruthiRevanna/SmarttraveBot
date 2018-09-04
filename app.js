@@ -10,7 +10,8 @@ const app = express();
 const uuid = require('uuid');
 var stringSimilarity = require('string-similarity');
 
-const product = require('./app/routes/node.route'); // Imports routes for the products
+//const product = require('./app/routes/node.route'); // Imports routes for the products
+const Product = require('./app/models/node.model');
 
 // Set up mongoose connection
 const mongoose = require('mongoose');
@@ -24,7 +25,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use('/products', product);
+//app.use('/products', product);
 
 
 
