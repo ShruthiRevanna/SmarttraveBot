@@ -113,21 +113,7 @@ app.post('/webhook', function (req, res) {
     var data = req.body;
     console.log(JSON.stringify(data));
 
-    var myData = new Product({
-        line:"Bakerloo",
-        status: "Good service"
-    });
-    myData.save()
-        .then(item => {
-            res.send("item saved to database");
-        })
-        .catch(err => {
-            res.status(400).send("unable to save to database");
-        });
-
-
-
-    // Make sure this is a page subscription
+      // Make sure this is a page subscription
     if (data.object == 'page') {
         // Iterate over each entry
         // There may be multiple if batched
