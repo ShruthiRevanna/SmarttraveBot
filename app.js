@@ -301,19 +301,38 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 setTimeout( function (){
                                     sendTextMessage(sender, "I hope the information is helpful. Do you need any further information? (yes/no)");
                                 },3000)
-                                //app.post('/', function(req, res) {
-                                    // Insert JSON straight into MongoDB
+
+                                exports.product_create = function (req, res) {
+                                    let product = new Product(
+                                        {
+                                            line: req.body.line,
+                                            status: req.body.status
+                                        }
+                                    );
+
+                                    product.save(function (err) {
+                                        if (err) {
+                                            return (err);
+                                        }
+                                        res.send('Product Created successfully')
+                                    })
+                                };
+
+
                                 var myobj = { line:national[national_num]["name"],
                                               status:reply
                                       }
                                     console.log(myobj.line,'\n');
                                     console.log(myobj.status,'\n');
-                                    db.collection("products").insertOne(myobj, function (err, res) {
+                                    db.products.insert({ line:national[national_num]["name"],
+                                        status:reply
+                                    })
+                                    /*db.collection("products").insertOne(myobj, function (err, res) {
                                         if (err)
                                             console.log('Error in document inserting');
                                         else
                                             console.log('Document inserted');
-                                    });
+                                    });*/
                                // console.log(national_id);
                                // console.log(national[national_num]["name"]);
                                // console.log(similarity);
