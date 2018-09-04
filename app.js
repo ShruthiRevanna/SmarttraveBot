@@ -113,12 +113,14 @@ app.post('/webhook', function (req, res) {
     var data = req.body;
     console.log(JSON.stringify(data));
 
-    var myobj = { name: "Company Inc", address: "Highway 37" };
-    db.collection("customers").insertOne(myobj, function(err, res) {
-        if (err) throw err;
-        console.log("1 document inserted");
-        db.close();
-    });
+    var myData = new Product(req.body);
+    myData.save()
+        .then(item => {
+            res.send("item saved to database");
+        })
+        .catch(err => {
+            res.status(400).send("unable to save to database");
+        });
 
 
 
