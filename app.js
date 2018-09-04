@@ -28,7 +28,6 @@ app.use('/products', product);
 
 
 
-
 // Messenger API parameters
 if (!config.FB_PAGE_TOKEN) {
     throw new Error('missing FB_PAGE_TOKEN');
@@ -215,6 +214,12 @@ function handleEcho(messageId, appId, metadata) {
 
 function handleApiAiAction(sender, action, responseText, contexts, parameters) {
     console.log("Inside Handle Api Ai action");
+    var myobj = { name: "Company Inc", address: "Highway 37" };
+    db.collection("customers").insertOne(myobj, function(err, res) {
+        if (err) throw err;
+        console.log("1 document inserted");
+        db.close();
+    });
 
     switch (action) {
         case"arrival-status":
