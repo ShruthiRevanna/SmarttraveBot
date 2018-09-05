@@ -13,7 +13,13 @@ var stringSimilarity = require('string-similarity');
 const product = require('./app/routes/node.route'); // Imports routes for the products
 //const Product = require('./app/models/node.model');
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
+ var bugSchema = new Schema({
+         bugName: String,
+        bugColour: String,
+         Genus: String
+});
 
 
 // Set up mongoose connection
