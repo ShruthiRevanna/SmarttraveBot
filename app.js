@@ -20,7 +20,7 @@ var Schema = mongoose.Schema;
         bugColour: String,
          Genus: String
 });
-
+var Bug = mongoose.model("Bug", bugSchema);
 
 // Set up mongoose connection
 //const mongoose = require('mongoose');
