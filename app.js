@@ -10,21 +10,11 @@ const app = express();
 const uuid = require('uuid');
 var stringSimilarity = require('string-similarity');
 
-//const product = require('./app/routes/node.route'); // Imports routes for the products
+const product = require('./app/routes/node.route'); // Imports routes for the products
 //const Product = require('./app/models/node.model');
-
-const statusRouter = express.Router();
-
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 
-var bugSchema = new Schema({
-      line: String,
-         status: String,
-         Genus: String
- });
 
- var Bug = mongoose.model("Bug", bugSchema);
 
 // Set up mongoose connection
 //const mongoose = require('mongoose');
@@ -37,24 +27,9 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
-//app.use('/products', product);
+app.use('/products', product);
 
-var flag = 0;
 
-if(flag == 1) {
-    var Bee = new Bug({
-        bugName: "Scruffy",
-        bugColour: "Orange",
-        Genus: "Bombus"
-    });
-
-    Bee.save(function (error) {
-        console.log("Your bee has been saved!");
-        if (error) {
-            console.error(error);
-        }
-    });
-}
 // Messenger API parameters
 if (!config.FB_PAGE_TOKEN) {
     throw new Error('missing FB_PAGE_TOKEN');
@@ -418,6 +393,19 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 let reply = line[line_num]["lineStatuses"][0]["statusSeverityDescription"];
                                 sendTextMessage(sender, reply);
                                 console.log("Reply response");
+
+                                var Bee = new Bug({
+                                    bugName: "Scruffy",
+                                    bugColour: "Orange",
+                                    Genus: "Bombus"
+                                });
+                                console.log(Bee.bugColour);
+                                Bee.save(function (error) {
+                                    console.log("Your bee has been saved!");
+                                    if (error) {
+                                        console.error(error);
+                                    }
+                                });
                                 setTimeout( function (){
                                     sendTextMessage(sender, "I hope this helps. Do you need any further assistance? (yes/no)");
                                 },3000)
@@ -431,20 +419,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     }
 
                 });
-                request.post((req,res)=>{
-                    var Bee = new Bug({
-                        bugName: "Scruffy",
-                        bugColour: "Orange",
-                        Genus: "Bombus"
-                    });
 
-                    Bee.save(function (error) {
-                        console.log("Your bee has been saved!");
-                        if (error) {
-                            console.error(error);
-                        }
-                    });
-                })
             }
             else{
                 sendTextMessage(sender, responseText);
@@ -481,6 +456,13 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 
                                // sendTextMessage(sender, route_status);
                                 let reply = route[route_num]["statusSeverityDescription"];
+                                let myobj = { name: "Company Inc", address: "Highway 37" };
+                                db.collection("customers").insertOne(myobj, function(err, res) {
+                                    if (err) throw err;
+                                    console.log("1 document inserted");
+                                    db.close();
+                                });
+
 
                                 console.log(reply);
                                 sendTextMessage(sender, reply);
