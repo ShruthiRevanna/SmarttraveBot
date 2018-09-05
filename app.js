@@ -10,8 +10,10 @@ const app = express();
 const uuid = require('uuid');
 var stringSimilarity = require('string-similarity');
 
-const product = require('./app/routes/node.route'); // Imports routes for the products
+//const product = require('./app/routes/node.route'); // Imports routes for the products
 //const Product = require('./app/models/node.model');
+
+const statusRouter = express.Router();
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
@@ -34,9 +36,8 @@ mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
-app.use('/products', product);
+
+//app.use('/products', product);
 
 var flag = 0;
 
@@ -78,6 +79,28 @@ if (!config.TFL_API_KEY) { //used for ink to static files
 if (!config.TFL_API_ID) { //used for ink to static files
     throw new Error('Missing TFL API ID');
 }
+
+
+
+
+//app.set('port', (process.env.PORT || 5000))
+
+//verify request came from facebook
+app.use(bodyParser.json({
+    verify: verifyRequestSignature
+}));
+
+//serve static files in the public directory
+app.use(express.static('public'));
+
+// Process application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({
+    extended: false
+}))
+
+// Process application/json
+app.use(bodyParser.json())
+
 
 
 
@@ -395,15 +418,11 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 let reply = line[line_num]["lineStatuses"][0]["statusSeverityDescription"];
                                 sendTextMessage(sender, reply);
                                 console.log("Reply response");
-
-
                                 setTimeout( function (){
                                     sendTextMessage(sender, "I hope this helps. Do you need any further assistance? (yes/no)");
                                 },3000)
 
                                 break;
-
-
                             }
                         }
                     }else{
@@ -412,6 +431,20 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     }
 
                 });
+                request.post((req,res)=>{
+                    var Bee = new Bug({
+                        bugName: "Scruffy",
+                        bugColour: "Orange",
+                        Genus: "Bombus"
+                    });
+
+                    Bee.save(function (error) {
+                        console.log("Your bee has been saved!");
+                        if (error) {
+                            console.error(error);
+                        }
+                    });
+                })
             }
             else{
                 sendTextMessage(sender, responseText);
@@ -545,7 +578,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 sendTextMessage(sender, reply);
                                 console.log("Reply response");
                                 console.log(reply);
-                                    var Bee = new Bug({
+                                    let Bee = new Bug({
                                         bugName: "Scruffy",
                                         bugColour: "Orange",
                                         Genus: "Bombus"
