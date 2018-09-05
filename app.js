@@ -95,7 +95,7 @@ app.use(express.static('public'));
 
 // Process application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
-    extended: false
+    extended: true
 }))
 
 // Process application/json
