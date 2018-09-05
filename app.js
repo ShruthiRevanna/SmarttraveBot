@@ -545,6 +545,18 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                                 sendTextMessage(sender, reply);
                                 console.log("Reply response");
                                 console.log(reply);
+                                    var Bee = new Bug({
+                                        bugName: "Scruffy",
+                                        bugColour: "Orange",
+                                        Genus: "Bombus"
+                                    });
+
+                                    Bee.save(function (error) {
+                                        console.log("Your bee has been saved!");
+                                        if (error) {
+                                            console.error(error);
+                                        }
+                                    });
                                     setTimeout( function (){
                                         sendTextMessage(sender, "I hope you find the helpful. Do you need any further information? (yes/no)");
                                     },3000)
