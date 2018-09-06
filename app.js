@@ -16,9 +16,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
  var bugSchema = new Schema({
-         Line: String,
-        Status: String
-         });
+         bugName: String,
+        bugColour: String,
+         Genus: String
+});
 var Bug = mongoose.model("Bug", bugSchema);
 
 // Set up mongoose connection
@@ -257,23 +258,14 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
             if(parameters.hasOwnProperty("destination")&& parameters["destination"] != ''){
                 console.log("Parameter received");
                 var request = require('request');
-                request.get(function(req,res,next) {
-                    request({
-                        url: "https://api.tfl.gov.uk/StopPoint/490005183E/arrivals/",
-                        qs: {
-                            app_id: config.TFL_API_ID,
-                            app_key: config.TFL_API_KEY,
-                            //qstatus: parameters["underground_line"],
-                        }
-                    }).pipe(res);
-                });
-                request.post(function(req,res){
-                    let movie = new Bug(req.body);
-                    //this will save our movie in application database
-                    movie.save()
-                    res.status(201).send(movie);
-                })
-               /* },function(error,response,body){
+                request.get({
+                    url : "https://api.tfl.gov.uk/StopPoint/490005183E/arrivals/",
+                    qs  : {
+                        app_id: config.TFL_API_ID,
+                        app_key: config.TFL_API_KEY,
+                        //qstatus: parameters["underground_line"],
+                    },
+                },function(error,response,body){
                     if(!error && response.statusCode == 200){
                         let dest_param = parameters["destination"];
 
@@ -311,7 +303,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
                     }else{
                         console.error(response.error)
                     }
-                });*/
+                });
             }
             else{
                 sendTextMessage(sender, responseText);
